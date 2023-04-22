@@ -30,10 +30,18 @@ def exit_bank():
 
 # cash = int(input("Введите сумму, кратную 50: "))
 
+def make_dict(id, string, cash):
+    dict = {}
+    di = {id:{string: cash}}
+    # dict.update(di)
+
+    return di
+
 
 def wellcome():
     # cash
     dict = {}
+    id = 1
     while True:
         global bank,count
         action = int(input('1 - Снять\n2 - Пополнить\n3 - Выйти\n'))
@@ -42,8 +50,8 @@ def wellcome():
         match action:
             case 1:
                 cash = int(input("Введите сумму, кратную 50: "))
-                di = {'take': cash}
-                dict.update(di) 
+                dict.update(make_dict(id, 'take', cash)) 
+                id += 1
                 # print('yo')
                 if cash := cash < bank:
                     take_bank(cash)                                    
@@ -53,8 +61,10 @@ def wellcome():
             case 2:
                 cash = int(input("Введите сумму, кратную 50: "))
                 add_bank(cash)
-                di = {'add': cash}
-                dict.update(di)
+                dict.update(make_dict(id, 'add', cash))
+                id += 1
+                # di = {'add': cash}
+                # dict.update(di)
             case 3:
                 print(dict)
                 exit_bank()
